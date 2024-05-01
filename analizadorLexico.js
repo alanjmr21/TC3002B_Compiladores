@@ -185,6 +185,7 @@ const string5 = "let alan = 123;";
 const string6 = "let alan1               =           1-10.35*50+100.00-12;"
 const string7 = "let alan1 = 123.78" // false (no termina con ;)
 const string8 = "let alan1 = 123.78 + 40 - 67;" // false (hay espacios en la operación aritmética)
+const string9 = `let alan\n    =      38;` // false (tiene salto de linea antes del simbolo =)
 
 console.log(verifyString(string1));
 console.log(verifyString(string2));
@@ -194,3 +195,4 @@ console.log(verifyString(string5));
 console.log(verifyString(string6));
 console.log(verifyString(string7));
 console.log(verifyString(string8));
+console.log(verifyString(string9));
