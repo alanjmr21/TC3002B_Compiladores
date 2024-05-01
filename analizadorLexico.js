@@ -43,7 +43,7 @@ function q4(char) {
   if (/[a-zA-Z]/.test(char)) {
     return "q5";
   } else if (char === " " || char === "\n") {
-    return "q4"
+    return "q4";
   }
 }
 
@@ -63,8 +63,8 @@ function q5(char) {
 function q6(char) {
   if (char === "=") {
     return "q7";
-  } else if (char === " "){
-    return "q6"
+  } else if (char === " ") {
+    return "q6";
   }
 }
 
@@ -80,8 +80,8 @@ function q7(char) {
 function q8(char) {
   if (/\d/.test(char)) {
     return "q9";
-  } else if (char === " "){
-    return "q8"
+  } else if (char === " ") {
+    return "q8";
   }
 }
 
@@ -119,12 +119,21 @@ function q12(char) {
   }
 }
 
+function handleErrorString(idx, length, char, currentState) {
+  if (idx === length - 1) {
+    console.log(false);
+  } else if (char === ";") {
+    console.log(false);
+  }
+}
+
 function verifyString(string) {
   let currentState = "q0";
 
   for (let i = 0; i < string.length; i++) {
     char = string[i];
-    //console.log(char);
+    console.log(char);
+    console.log(currentState)
     switch (currentState) {
       case "q0":
         currentState = q0(char);
@@ -165,34 +174,59 @@ function verifyString(string) {
       case "q12":
         currentState = q12(char);
         break;
+      case "q13":
+        currentState = "q0";
+        i--;
+        console.log(true);
+        break;
       default:
-        currentState = false;
+        currentState = "none"
+        if (i === (string.length - 1)) {
+          console.log(false);
+        } else if (char === ";") {
+          console.log(false);
+          currentState = "q0"
+        }
     }
 
-    if (currentState === false) {
-      return currentState;
-    }
+    // if (currentState === false) {
+    //   return currentState;
+    // }
   }
 
-  return currentState === "q13";
+  // return currentState === "q13";
 }
+
+// function verifyMultipleStrings(string){
+//   const stringsList = string.split(";")
+
+//   stringsList.map((string) => {
+//     console.log(string)
+//     console.log(verifyString(string))
+//   })
+// }
 
 const string1 = "let alan49=123;";
 const string2 = `let\n\n\n\n   alan12jose13=123;`;
 const string3 = "let alan= 132;";
 const string4 = "let alan =23-76.2+49/70.96;";
 const string5 = "let alan = 123;";
-const string6 = "let alan1               =           1-10.35*50+100.00-12;"
-const string7 = "let alan1 = 123.78" // false (no termina con ;)
-const string8 = "let alan1 = 123.78 + 40 - 67;" // false (hay espacios en la operación aritmética)
-const string9 = `let alan\n    =      38;` // false (tiene salto de linea antes del simbolo =)
+const string6 = "let alan1               =           1-10.35*50+100.00-12;";
+const string7 = "let alan1 = 123.78"; // false (no termina con ;)
+const string8 = "let alan1 = 123.78 + 40 - 67;"; // false (hay espacios en la operación aritmética)
+const string9 = `let alan\n    =      38;`; // false (tiene salto de linea antes del simbolo =)
+const string10 = `let v1 = 12;let      variable2= 32.78;let variable3 = 21.3*30.12/4*6;let\n\nvariable4 = 234.67;let variable 5 = 3;let alan = 4;`;
 
-console.log(verifyString(string1));
-console.log(verifyString(string2));
-console.log(verifyString(string3));
-console.log(verifyString(string4));
-console.log(verifyString(string5));
-console.log(verifyString(string6));
-console.log(verifyString(string7));
-console.log(verifyString(string8));
-console.log(verifyString(string9));
+// console.log(verifyString(string1));
+// console.log(verifyString(string2));
+// console.log(verifyString(string3));
+// console.log(verifyString(string4));
+// console.log(verifyString(string5));
+// console.log(verifyString(string6));
+// console.log(verifyString(string7));
+// console.log(verifyString(string8));
+// console.log(verifyString(string9));
+
+// verifyMultipleStrings(string10);
+
+verifyString(string10);
