@@ -42,6 +42,8 @@ State q4 checks if a variable starts with a letter [a-z, A-Z]
 function q4(char) {
   if (/[a-zA-Z]/.test(char)) {
     return "q5";
+  } else if (char === " " || char === "\n") {
+    return "q4"
   }
 }
 
@@ -61,6 +63,8 @@ function q5(char) {
 function q6(char) {
   if (char === "=") {
     return "q7";
+  } else if (char === " "){
+    return "q6"
   }
 }
 
@@ -76,6 +80,8 @@ function q7(char) {
 function q8(char) {
   if (/\d/.test(char)) {
     return "q9";
+  } else if (char === " "){
+    return "q8"
   }
 }
 
@@ -172,11 +178,13 @@ function verifyString(string) {
 }
 
 const string1 = "let alan49=123;";
-const string2 = `let\nalan12jose13=123;`;
+const string2 = `let\n\n\n\n   alan12jose13=123;`;
 const string3 = "let alan= 132;";
-const string4 = "let alan =23-76.2+49;";
+const string4 = "let alan =23-76.2+49/70.96;";
 const string5 = "let alan = 123;";
-const string6 = "let alan1 = 123.78"
+const string6 = "let alan1               =           1-10.35*50+100.00-12;"
+const string7 = "let alan1 = 123.78" // false (no termina con ;)
+const string8 = "let alan1 = 123.78 + 40 - 67;" // false (hay espacios en la operación aritmética)
 
 console.log(verifyString(string1));
 console.log(verifyString(string2));
@@ -184,3 +192,5 @@ console.log(verifyString(string3));
 console.log(verifyString(string4));
 console.log(verifyString(string5));
 console.log(verifyString(string6));
+console.log(verifyString(string7));
+console.log(verifyString(string8));
